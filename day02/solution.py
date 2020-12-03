@@ -1,4 +1,5 @@
 import re
+import unittest
 
 from util import get_input
 
@@ -34,13 +35,16 @@ def part_two(_input):
     return len([password for password in passwords if password.is_valid_part_two()])
 
 
-def test():
-    _input = ['1-3 a: abcde', '1-3 b: cdefg', '2-9 c: ccccccccc']
-    print(part_two(_input))
-    assert part_one(_input) == 2
-    assert part_two(_input) == 1
+class Day2Tests(unittest.TestCase):
+    def setUpClass(self):
+        self.test_input = ['1-3 a: abcde', '1-3 b: cdefg', '2-9 c: ccccccccc']
+
+    def test_part_one(self):
+        self.assertEqual(2, part_one(self.test_input))
+
+    def test_part_two(self):
+        self.assertEqual(1, part_two(self.test_input))
 
 
-test()
 print(part_one(INPUT))
 print(part_two(INPUT))
