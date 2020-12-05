@@ -44,6 +44,7 @@ def part_two(_input):
 
 
 class Day3Tests(unittest.TestCase):
+    @classmethod
     def setUpClass(cls):
         cls.test_input = ['..##.........##.........##.........##.........##.........##.......',
                           '#...#...#..#...#...#..#...#...#..#...#...#..#...#...#..#...#...#..',
