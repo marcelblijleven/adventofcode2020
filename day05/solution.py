@@ -42,7 +42,13 @@ def part_one_binary_option(_input):
     ids = []
 
     for boarding_pass in _input:
-        boarding_pass = boarding_pass.replace('B', '1').replace('F', '0').replace('R', '1').replace('L', '0')
+        # could also use a translation table
+        # boarding_pass.translate(str.maketrans({'B': '1', 'F': '0', 'R': '1', 'L': '0'})
+        boarding_pass = boarding_pass\
+            .replace('B', '1')\
+            .replace('F', '0')\
+            .replace('R', '1')\
+            .replace('L', '0')
         ids.append(int(boarding_pass, 2))
 
     return max(ids), ids
