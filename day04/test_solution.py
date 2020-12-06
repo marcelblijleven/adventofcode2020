@@ -5,7 +5,7 @@ from day04.solution import (
 )
 
 
-class Test(TestCase):
+class TestDay04(TestCase):
     def test_dob_check(self):
         self.assertTrue(dob_check('1920'))
         self.assertTrue(dob_check('2002'))
