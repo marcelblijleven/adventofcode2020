@@ -71,5 +71,5 @@ def correcting_run(instructions):
                 instructions[idx] = operation, argument
 
 
-#print(part_one(INPUT))
-print(part_two(TEST_INPUT))
+print(part_one(INPUT))
+print(part_two(INPUT))
