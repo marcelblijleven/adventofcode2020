@@ -1,5 +1,8 @@
 from unittest import TestCase
-from day08.solution import parse_instruction, isolation_run, TEST_INPUT
+from day08.solution import (
+    parse_instruction, correcting_run, isolation_run,
+    verify_correction, TEST_INPUT
+)
 
 
 class TestParseInstruction(TestCase):
@@ -37,5 +40,30 @@ class TestParseInstruction(TestCase):
 class TestIsolationRun(TestCase):
     def test_isolation_run(self):
         instructions = [parse_instruction(line) for line in TEST_INPUT]
-        accumulator = isolation_run(instructions)
+        accumulator, _ = isolation_run(instructions)
         self.assertEqual(5, accumulator)
+
+
+class TestVerifyCorrection(TestCase):
+    def test_verify_correction(self):
+        instructions = [
+            ('jmp', 1),
+            ('jmp', -1)
+        ]
+
+        self.assertTrue(verify_correction(instructions))
+
+    def test_verify_correction_incorrect(self):
+        instructions = [
+            ('jmp', 0),
+            ('jmp', -1)
+        ]
+
+        self.assertFalse(verify_correction(instructions))
+
+
+class TestCorrectingRun(TestCase):
+    def test_correcting_run(self):
+        instructions = [parse_instruction(line) for line in TEST_INPUT]
+        accumulator = correcting_run(instructions)
+        self.assertEqual(8, accumulator)
