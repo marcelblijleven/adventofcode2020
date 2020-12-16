@@ -28,8 +28,19 @@ def part_one(_input, preamble):
     return decypher_xmas(preamble, _input)
 
 
-def part_two(_input):
-    pass
+def find_group_sum(numbers, target):
+    for left_edge in range(len(numbers)):
+        for right_edge in range(len(numbers)):
+            window = numbers[left_edge:right_edge]
+            if sum(window) == target:
+                return window
+
+
+def part_two(_input, preamble):
+    wrong_number = decypher_xmas(preamble, _input)
+    group = find_group_sum(_input, wrong_number)
+    return min(group) + max(group)
 
 
 print(part_one(INPUT, 25))
+print(part_two(INPUT, 25))
