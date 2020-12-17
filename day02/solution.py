@@ -1,7 +1,7 @@
 import re
 import unittest
 
-from util import get_input
+from util import get_input, solution_timer
 
 INPUT = get_input('input.txt')
 pattern = re.compile(r'(\d+)-(\d+) (\w+): (\w+)')
@@ -25,11 +25,13 @@ class PasswordHelper:
         return not position_one == position_two
 
 
+@solution_timer(2, 1)
 def part_one(_input):
     passwords = map(PasswordHelper, _input)
     return len([password for password in passwords if password.is_valid()])
 
 
+@solution_timer(2, 2)
 def part_two(_input):
     passwords = map(PasswordHelper, _input)
     return len([password for password in passwords if password.is_valid_part_two()])
@@ -46,5 +48,5 @@ class Day2Tests(unittest.TestCase):
         self.assertEqual(1, part_two(self.test_input))
 
 
-print(part_one(INPUT))
-print(part_two(INPUT))
+part_one(INPUT)
+part_two(INPUT)

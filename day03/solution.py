@@ -1,5 +1,5 @@
 import unittest
-from util import get_input
+from util import get_input, solution_timer
 
 INPUT = get_input('input.txt')
 
@@ -27,10 +27,12 @@ def evaluate_slope(_input, x_movement, y_movement):
     return tree_counter
 
 
+@solution_timer(3, 1)
 def part_one(_input):
     return evaluate_slope(_input, 3, 1)
 
 
+@solution_timer(3, 2)
 def part_two(_input):
     import math
     slopes = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
@@ -65,5 +67,5 @@ class Day3Tests(unittest.TestCase):
         self.assertEqual(part_two(self.test_input, 336))
 
 
-print(part_one(INPUT))
-print(part_two(INPUT))
+part_one(INPUT)
+part_two(INPUT)

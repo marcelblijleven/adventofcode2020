@@ -1,4 +1,4 @@
-from util import get_input
+from util import get_input, solution_timer
 
 INPUT = get_input('input.txt')
 TEST_INPUT = get_input('test_input.txt')
@@ -37,6 +37,7 @@ def get_all_answered(value: list[str]) -> list[str]:
     return s
 
 
+@solution_timer(6, 1)
 def part_one(_input):
     total = 0
 
@@ -46,6 +47,7 @@ def part_one(_input):
     return total
 
 
+@solution_timer(6, 2)
 def part_two(_input):
     total = 0
 
@@ -55,5 +57,5 @@ def part_two(_input):
     return total
 
 
-print(part_one(INPUT))
-print(part_two(INPUT))
+part_one(INPUT)
+part_two(INPUT)

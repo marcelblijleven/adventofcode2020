@@ -1,6 +1,6 @@
 import statistics
 
-from util import get_input
+from util import get_input, solution_timer
 
 INPUT = get_input('input.txt')
 
@@ -27,6 +27,7 @@ def parse(sequence, min_row, max_row):
     return parse(sequence, min_row, max_row)
 
 
+@solution_timer(5, 2)
 def part_one(_input):
     ids = []
 
@@ -54,6 +55,7 @@ def part_one_binary_option(_input):
     return max(ids), ids
 
 
+@solution_timer(5, 2)
 def part_two(_input):
     max_id, ids = part_one_binary_option(_input)
 
@@ -62,6 +64,6 @@ def part_two(_input):
             return _id
 
 
-print(part_one(INPUT))
-print(part_one_binary_option(INPUT))
-print(part_two(INPUT))
+part_one(INPUT)
+part_one_binary_option(INPUT)
+part_two(INPUT)

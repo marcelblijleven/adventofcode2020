@@ -1,6 +1,6 @@
 import unittest
 import re
-from util import read_file
+from util import read_file, solution_timer
 
 INPUT = read_file('input.txt')
 
@@ -99,11 +99,13 @@ def deep_validation(passport: dict):
     return all(checks)
 
 
+@solution_timer(4, 1)
 def part_one(_input):
     passports = get_passports(_input)
     return len([passport for passport in passports if validate_passport(passport)])
 
 
+@solution_timer(4, 2)
 def part_two(_input):
     passports = get_passports(_input)
     return len([passport for passport in passports if deep_validation(passport)])
@@ -121,5 +123,5 @@ class Day4Test(unittest.TestCase):
         self.assertEqual(part_two(self.test_input), 2)
 
 
-print(part_one(INPUT))
-print(part_two(INPUT))
+part_one(INPUT)
+part_two(INPUT)

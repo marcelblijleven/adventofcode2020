@@ -1,5 +1,5 @@
 import re
-from util import get_input
+from util import get_input, solution_timer
 
 INPUT = get_input('input.txt')
 
@@ -11,6 +11,7 @@ contents_pattern = re.compile(r'((\d) ([a-z]+ [a-z]+))')
 gold_bag = 'shiny gold'
 
 
+@solution_timer(7, 1)
 def part_one(_input):
     bags = get_bags(_input)
     gold_holders = []
@@ -21,6 +22,7 @@ def part_one(_input):
     return len(gold_holders), gold_holders
 
 
+@solution_timer(7, 2)
 def part_two(_input):
     bags = get_bags(_input)
     return bag_counter(gold_bag, bags, 1, 0)
@@ -64,5 +66,5 @@ def bag_counter(bag, bags, multiplier, total):
     return total
 
 
-print(part_one(INPUT))
-print(part_two(INPUT))
+part_one(INPUT)
+part_two(INPUT)

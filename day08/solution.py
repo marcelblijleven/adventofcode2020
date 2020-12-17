@@ -1,4 +1,4 @@
-from util import get_input
+from util import get_input, solution_timer
 
 TEST_INPUT = get_input('test_input.txt')
 INPUT = get_input('input.txt')
@@ -8,12 +8,14 @@ OPERATION_JMP = 'jmp'
 OPERATION_NOP = 'nop'
 
 
+@solution_timer(8, 1)
 def part_one(_input):
     instructions = [parse_instruction(line) for line in _input]
     accumulator = isolation_run(instructions)
     return accumulator
 
 
+@solution_timer(8, 2)
 def part_two(_input):
     instructions = [parse_instruction(line) for line in _input]
     accumulator = correcting_run(instructions)
@@ -71,5 +73,5 @@ def correcting_run(instructions):
                 instructions[idx] = operation, argument
 
 
-print(part_one(INPUT))
-print(part_two(INPUT))
+part_one(INPUT)
+part_two(INPUT)
