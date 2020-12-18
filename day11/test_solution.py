@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from day11.solution import (
     get_adjacent_coordinates, get_layout, get_x_y_range,
-    start_iterating, TEST_INPUT
+    start_iterating, los_seating_iteration, TEST_INPUT
 )
 
 
@@ -62,3 +62,8 @@ class Test(TestCase):
         layout = get_layout(TEST_INPUT)
         result = start_iterating(layout)
         self.assertEqual(37, result)
+
+    def test_start_iterating_part_two(self):
+        layout = get_layout(TEST_INPUT)
+        result = start_iterating(layout, los_seating_iteration)
+        self.assertEqual(26, result)

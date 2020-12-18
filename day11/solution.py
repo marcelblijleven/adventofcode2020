@@ -1,7 +1,6 @@
 from util import get_input, solution_timer
 from operator import itemgetter
 
-
 TEST_INPUT = get_input('test_input.txt')
 INPUT = get_input('input.txt')
 FREE_SEAT = 'L'
@@ -74,12 +73,12 @@ def print_layout(layout):
     print('\n'.join(lines), '\n')
 
 
-def start_iterating(layout):
+def start_iterating(layout, iteration_func=seating_iteration):
     previous_layout = layout
     iteration = 1
 
     while True:
-        new_layout = seating_iteration(previous_layout)
+        new_layout = iteration_func(previous_layout)
         if new_layout == previous_layout:
             return len([value for value in new_layout.values() if value == TAKEN_SEAT])
 
@@ -94,8 +93,65 @@ def part_one(_input):
     return taken_seats
 
 
+def seats_in_line_of_sight(layout, current_x, current_y):
+    directions = {
+        'left': (-1, 0),
+        'right': (1, 0),
+        'up': (0, -1),
+        'down': (0, 1),
+        'left_up': (-1, -1),
+        'right_up': (1, -1),
+        'left_down': (-1, 1),
+        'right_down': (1, 1),
+    }
+
+    coords = {}
+
+    for direction in directions.values():
+        x = current_x
+        y = current_y
+
+        while True:
+            x = x + direction[0]
+            y = y + direction[1]
+
+            if (x, y) not in layout.keys():
+                break
+
+            if layout[x, y] != FLOOR:
+                coords[x, y] = layout[x, y]
+                break
+
+    return coords
+
+
+def los_seating_iteration(layout, tolerance=5):
+    new_layout = layout.copy()
+    max_x, max_y = get_x_y_range(layout)
+
+    for y in range(max_y + 1):
+        for x in range(max_x + 1):
+            if layout[x, y] == FLOOR:
+                continue
+
+            seats = seats_in_line_of_sight(layout, x, y)
+
+            if layout[x, y] == FREE_SEAT:
+                if [v for k, v in seats.items() if k != (x, y)].count(TAKEN_SEAT) == 0:
+                    new_layout[x, y] = TAKEN_SEAT
+            elif layout[x, y] == TAKEN_SEAT:
+                if [v for k, v in seats.items() if k != (x, y)].count(TAKEN_SEAT) >= tolerance:
+                    new_layout[x, y] = FREE_SEAT
+
+    return new_layout
+
+
+@solution_timer(day=11, part=2)
 def part_two(_input):
-    pass
+    layout = get_layout(_input)
+    taken_seats = start_iterating(layout, los_seating_iteration)
+    return taken_seats
 
 
-part_one(TEST_INPUT)
+part_one(INPUT)
+part_two(INPUT)
